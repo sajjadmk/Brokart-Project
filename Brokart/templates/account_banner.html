@@ -13,18 +13,27 @@
                         <span onclick="register()">Register</span>
                         <hr id="Indicator" style="transform: translateX(100px);">
                     </div>
-                    <form id="LoginForm" style="transform: translateX(0px);">
-                        <input type="text" placeholder="Username">
-                        <input type="password" placeholder="Password">
-                        <button type="submit" class="btn">Login</button>
+                    <form id="LoginForm" style="transform: translateX(0px);" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="text" name="username" required placeholder="Username">
+                        <input type="password" name="password" required placeholder="Password">
+                        <button type="submit" name="login" class="btn">Login</button>
                         <a href="">Forget Password</a>
                     </form>
 
-                    <form id="RegForm" style="transform: translateX(0px);">
-                        <input type="text" placeholder="Username">
-                        <input type="email" placeholder="Email">
-                        <input type="password" placeholder="Password">
-                        <button type="submit" class="btn">Register</button>
+                    <form id="RegForm" style="transform: translateX(0px);" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if messages %}
+                        {% for message in messages %}
+                        <p style="color: red; font-size: large;">{{ message }}</p>
+                        {% endfor %}
+                        {% endif %}
+                        <input type="text" name="username" required minlength="5" maxlength="12" placeholder="username">
+                        <input type="email" name="email" required  placeholder="email">
+                        <input type="password" name="password" required minlength="6" maxlength="12" placeholder="password">
+                        <input type="text" name="address" required minlength="6" maxlength="60" placeholder="address">
+                        <input type="text" name="phone" required minlength="10" maxlength="12" placeholder="phone">
+                        <button type="submit" name="register" class="btn">Register</button>
                     </form>
                 </div>
             </div>
